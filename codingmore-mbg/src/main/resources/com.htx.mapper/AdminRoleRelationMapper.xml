@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.htx.mapper.AdminRoleRelationMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.htx.model.AdminRoleRelation">
+        <id column="admin_role_relation_id" property="adminRoleRelationId" />
+        <result column="users_id" property="usersId" />
+        <result column="role_id" property="roleId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        admin_role_relation_id, users_id, role_id
+    </sql>
+
+    <insert id="insertList">
+        INSERT INTO admin_role_relation (users_id, role_id) VALUES
+        <foreach collection="list" separator="," item="item" index="index">
+            (#{item.usersId,jdbcType=BIGINT},
+            #{item.roleId,jdbcType=BIGINT})
+        </foreach>
+    </insert>
+
+    <select id="getRoleList"  resultType="com.htx.model.Role">
+        select r.*
+        from admin_role_relation ar left join role r on ar.role_id = r.role_id
+        where ar.users_id = #{usersId}
+    </select>
+   
+  
+    <select id="getResourceList" resultType="com.htx.model.Resource">
+        SELECT
+            ur.resource_id resourceId,
+            ur.create_time createTime,
+            ur.`name` `name`,
+            ur.url url,
+            ur.description description,
+            ur.category_id categoryId
+        FROM
+            admin_role_relation ar
+                LEFT JOIN role r ON ar.role_id = r.role_id
+                LEFT JOIN role_resource_relation rrr ON r.role_id = rrr.role_id
+                LEFT JOIN resource ur ON ur.resource_id = rrr.resource_id
+        WHERE
+            ar.users_id = #{usersId}
+          AND ur.resource_id IS NOT NULL
+        GROUP BY
+            ur.resource_id
+    </select>
+
+    <select id="getAdminIdList" resultType="java.lang.Long">
+        SELECT
+            DISTINCT ar.users_id
+        FROM
+            role_resource_relation rr
+                LEFT JOIN admin_role_relation ar ON rr.role_id = ar.role_id
+        WHERE rr.resource_id=#{resourceId}
+    </select>
+
+</mapper>

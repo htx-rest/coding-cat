@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.htx.mapper.RoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.htx.model.Role">
+        <id column="role_id" property="roleId" />
+        <result column="name" property="name" />
+        <result column="description" property="description" />
+        <result column="create_time" property="createTime" />
+        <result column="status" property="status" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        role_id, name, description, create_time, status
+    </sql>
+
+    <select id="getMenuList" resultType="com.htx.model.Menu">
+        SELECT
+            m.menu_id menuId,
+            m.parent_id parentId,
+            m.create_time createTime,
+            m.title title,
+            m.level level,
+            m.sort sort,
+            m.name name,
+            m.icon icon,
+            m.hidden hidden
+        FROM
+            admin_role_relation arr
+                LEFT JOIN role r ON arr.role_id = r.role_id
+                LEFT JOIN role_menu_relation rmr ON r.role_id = rmr.role_id
+                LEFT JOIN menu m ON rmr.menu_id = m.menu_id
+        WHERE
+            arr.users_id = #{usersId}
+          AND m.menu_id IS NOT NULL
+        GROUP BY
+            m.menu_id
+    </select>
+    <select id="getMenuListByRoleId" resultType="com.htx.model.Menu">
+        SELECT
+            m.menu_id menuId,
+            m.parent_id parentId,
+            m.create_time createTime,
+            m.title title,
+            m.level level,
+            m.sort sort,
+            m.name name,
+            m.icon icon,
+            m.hidden hidden
+        FROM
+            role_menu_relation rmr
+                LEFT JOIN menu m ON rmr.menu_id = m.menu_id
+        WHERE
+            rmr.role_id = #{roleId}
+          AND m.menu_id IS NOT NULL
+        GROUP BY
+            m.menu_id
+    </select>
+    <select id="getResourceListByRoleId" resultType="com.htx.model.Resource">
+        SELECT
+            r.resource_id resourceId,
+            r.create_time createTime,
+            r.`name` `name`,
+            r.url url,
+            r.description description,
+            r.category_id categoryId
+        FROM
+            role_resource_relation rrr
+                LEFT JOIN resource r ON rrr.resource_id = r.resource_id
+        WHERE
+            rrr.role_id = #{roleId}
+          AND r.resource_id IS NOT NULL
+        GROUP BY
+            r.resource_id
+    </select>
+
+    <sql id="Base_Column_List_Count">
+        a.role_id, name, description, create_time, status
+    </sql>
+
+    <select id="findByPage" resultType="com.htx.vo.RoleVo">
+        select  <include refid="Base_Column_List_Count" />, IFNULL(c.admin_count,0) admin_count
+        from role a left join (select  count(b.role_id) admin_count,b.role_id
+        from  admin_role_relation b  GROUP BY b.role_id )  c on a.role_id = c.role_id  ${ew.customSqlSegment}
+    </select>
+
+</mapper>
