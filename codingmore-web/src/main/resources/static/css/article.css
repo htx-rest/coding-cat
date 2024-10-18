@@ -1,0 +1,313 @@
+/* PC端样式 */
+@media screen and (min-width: 751px) {
+  .article-main {
+    width: 1140px;
+    display: flex;
+    margin: 0 auto;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+
+  .author-and-flags:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+  .article-area {
+    /* min-height: clac(100% - 20px); */
+    flex-grow: 1;
+    box-sizing: border-box;
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 30px 30px 40px;
+  }
+
+  .article-area .title {
+    font-size: 64px;
+    color: #333;
+    font-weight: 300;
+    letter-spacing: -1.5px;
+    margin-top: 20px;
+    font-size: 47px;
+    line-height: 1;
+  }
+
+  .article-area .last-update-time {
+    color: #333;
+    margin-top: 3em;
+    font-weight: 300;
+  }
+
+  .article-area .author-and-flags .author-box .author-by,
+  .article-area .author-and-flags .author-box .author-name {
+    font-size: 18px;
+    color: #333;
+    padding: 0;
+    margin: 0;
+    width: 50px;
+    line-height: 19px;
+  }
+
+  .author-by {
+    font-weight: 300;
+  }
+
+  .article-area .author-and-flags .author-box {
+    border-left: 1px solid #63b175;
+    float: left;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    padding-left: 20px;
+  }
+
+  .article-area .author-and-flags .labels {
+    margin-top: 47px;
+    flex-grow: 1;
+    float: right;
+  }
+
+  .article-area .author-and-flags .author-name a,
+  .article-area .author-and-flags .author-name a:active,
+  .article-area .author-and-flags .author-name a:visited {
+    color: #2E8041;
+  }
+
+  .article-area .author-and-flags .author-name a:hover {
+    text-decoration: underline;
+  }
+
+  .article-area .author-and-flags a.label,
+  .article-area .author-and-flags a.label:active,
+  .article-area .author-and-flags a.label:visited {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #63B175;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 8px;
+  }
+
+  .article-area .author-and-flags a.label:hover {
+    background-color: #2E8041;
+    text-decoration: none;
+  }
+
+  /* 封面图样式 */
+  .cover-pic {
+    max-width: 820px;
+    display: block;
+    margin: 30px auto;
+    max-height: 400px;
+  }
+
+  /* 广告列 */
+  .fiex-ad {
+    width: 240px;
+    /* min-height: 100%; */
+    flex-shrink: 0;
+    margin-left: 20px;
+    margin-top: 20px;
+    /* background-color: blueviolet; */
+  }
+
+  .fiex-ad a {
+    display: block;
+    position: sticky;
+    top: 70px;
+  }
+
+  .fiex-ad img {
+    width: 240px;
+  }
+
+  /* 点赞区域样式 */
+  .like-area {
+    padding: 20px;
+  }
+
+  /* 点赞按钮相关样式 */
+  .btn-like {
+    display: inline-block;
+    padding: 15px;
+    border: 2px solid #63b175;
+    border-radius: 8px;
+    background-color: #ffffff;
+    cursor: pointer;
+  }
+
+  .btn-like.clicked {
+    background-color: #63b175;
+  }
+
+  .btn-like img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .btn-like .like-clicked {
+    display: none;
+  }
+
+  .btn-like .like-unclicked {
+    display: block;
+  }
+
+  .btn-like.clicked .like-clicked {
+    display: block;
+  }
+
+  .btn-like.clicked .like-unclicked {
+    display: none;
+  }
+}
+
+.article-area img {
+  max-width: 100%;
+}
+
+/* 移动端样式 */
+@media screen and (max-width: 750px) {
+  body {
+    background-color: #fff;
+  }
+
+  .article-main {
+    margin: 0 auto;
+    width: 96vw;
+
+  }
+
+  /* 封面图样式 */
+  .cover-pic {
+    max-width: 96vw;
+    display: block;
+    margin: 3vw auto;
+  }
+
+  .article-area {
+    margin-top: 3vw;
+
+    /* min-height: 100%; */
+  }
+
+  .article-area .title {
+    font-size: 6vw;
+    font-weight: 300;
+    line-height: 1.2;
+    text-align: justify;
+  }
+
+  .article-area .last-update-time {
+    font-size: 4vw;
+    margin-top: 6vw;
+    margin-bottom: 6vw;
+  }
+
+  .article-area .author-and-flags {
+    /* display: flex; */
+    font-size: 4vw;
+    line-height: 2;
+    margin-bottom: 6vw;
+  }
+
+  .article-area .author-and-flags .author-box {
+    flex-shrink: 0;
+    border-left: 0.5vw solid #63B175;
+    padding-left: 6vw;
+    margin-bottom: 4vw;
+  }
+
+  .article-area .author-and-flags .labels {
+    flex-grow: 1;
+  }
+
+  .article-area .author-and-flags .labels.text-right {
+    text-align: left;
+  }
+
+  .article-area .author-and-flags a.author-name,
+  .article-area .author-and-flags a.author-name:active,
+  .article-area .author-and-flags a.author-name:visited {
+    color: #2E8041;
+  }
+
+  .article-area .author-and-flags a.author-name:hover {
+    text-decoration: underline;
+  }
+
+  .article-area .author-and-flags a.label,
+  .article-area .author-and-flags a.label:active,
+  .article-area .author-and-flags a.label:visited {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 4vw;
+    font-weight: bold;
+    color: #fff;
+    background-color: #63B175;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    margin-right: 2vw;
+  }
+
+  .article-area .author-and-flags a.label:hover {
+    background-color: #2E8041;
+    text-decoration: none;
+  }
+
+  /* 广告列 */
+  .fiex-ad {
+    width: auto;
+  }
+
+  .fiex-ad img {
+    width: 100%;
+  }
+
+  /* 点赞区域样式 */
+  .like-area {
+    padding: 20px;
+  }
+
+  /* 点赞按钮相关样式 */
+  .btn-like {
+    display: inline-block;
+    padding: 3vw;
+    border: 0.2vw solid #63b175;
+    border-radius: 1vw;
+    background-color: #ffffff;
+    cursor: pointer;
+  }
+
+  .btn-like.clicked {
+    background-color: #63b175;
+  }
+
+  .btn-like img {
+    width: 5vw;
+    height: 5vw;
+  }
+
+  .btn-like .like-clicked {
+    display: none;
+  }
+
+  .btn-like .like-unclicked {
+    display: block;
+  }
+
+  .btn-like.clicked .like-clicked {
+    display: block;
+  }
+
+  .btn-like.clicked .like-unclicked {
+    display: none;
+  }
+
+  .reflesh-area.mobile {
+    display: none;
+  }
+}
